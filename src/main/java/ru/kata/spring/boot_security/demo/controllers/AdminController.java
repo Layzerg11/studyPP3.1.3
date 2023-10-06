@@ -5,15 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.services.UserServiceImp;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    UserRepository userRepository;
     private final UserServiceImp userServiceImp;
 
     @Autowired
@@ -39,8 +36,8 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("admin") User user, @PathVariable("id") long id) {
-        userServiceImp.updateUser(id, user);
+    public String update(@ModelAttribute("admin") User user) {
+        userServiceImp.updateUser(user);
         return "redirect:/admin";
     }
 
